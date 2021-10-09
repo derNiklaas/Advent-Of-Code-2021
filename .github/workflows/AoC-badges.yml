@@ -1,7 +1,7 @@
 name: 🎄 Advent of Code Badges 🎄
 on:
   schedule:
-    - cron: '0 12 1-25 12 *'
+    - cron: '3 12 1-25 12 *'
   workflow_dispatch:
   push:
     paths:
@@ -13,14 +13,12 @@ jobs:
     if: startsWith(github.repository, 'derNiklaas') # don't run in forks
     steps:
       - uses: actions/checkout@v2
-      - uses: joblo2213/aoc-badges-action@v2.1
+      - uses: joblo2213/aoc-badges-action@v3
         with:
           userid: 455680
           session: ${{ secrets.AOC_SESSION }}
-      - name: 📤 Push
-        run: |
-          git config --global user.email "<>"
-          git config --global user.name "GitHub Actions"
-          git add .
-          git diff-index --quiet HEAD || git commit --message "Update badges"
-          git push
+          year: 2021
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update badges
+          file_pattern: README.md
