@@ -19,6 +19,7 @@ jobs:
         with:
           java-version: '16'
           distribution: 'adopt'
+          cache: 'gradle'
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
