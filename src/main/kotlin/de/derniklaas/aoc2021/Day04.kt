@@ -28,13 +28,13 @@ public class Day04(private val input: List<String>) {
         for (line in input) {
             // Get all drawn numbers in order
             if (line.contains(",")) {
-                numbers = line.split(",").mapToInt()
+                numbers = line.splitAndMapToInt(",")
                 continue
             }
 
             // Fill the board with numbers
             currentBoard[currentX] =
-                line.split(" ").filter(String::isNotEmpty).mapToInt().map { BingoField(it, false) }.toTypedArray()
+                line.splitAndMapToInt().map { BingoField(it, false) }.toTypedArray()
             currentX++
 
             // Create a new Board if we reached the end of the current one
