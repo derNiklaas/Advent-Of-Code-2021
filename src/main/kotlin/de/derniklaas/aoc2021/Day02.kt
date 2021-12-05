@@ -13,16 +13,16 @@ fun main() {
 
 public class Day02(private val input: List<String>) {
 
-    private var currentPoint: Point2D = Point2D(0, 0)
+    private var currentPoint: Point = Point(0, 0)
     public fun part1(): Int {
-        currentPoint = Point2D(0, 0)
+        currentPoint = Point(0, 0)
         for (line in input) {
             val (direction, distance) = line.split(" ")
             val amount = distance.toInt()
             currentPoint = when (direction) {
-                "forward" -> Point2D(currentPoint.x + amount, currentPoint.y)
-                "down" -> Point2D(currentPoint.x, currentPoint.y - amount)
-                "up" -> Point2D(currentPoint.x, currentPoint.y + amount)
+                "forward" -> Point(currentPoint.x + amount, currentPoint.y)
+                "down" -> Point(currentPoint.x, currentPoint.y - amount)
+                "up" -> Point(currentPoint.x, currentPoint.y + amount)
                 else -> throw IllegalArgumentException("Unknown direction: $direction")
             }
         }
@@ -30,13 +30,13 @@ public class Day02(private val input: List<String>) {
     }
 
     public fun part2(): Int {
-        currentPoint = Point2D(0, 0)
+        currentPoint = Point(0, 0)
         var aim = 0
         for (line in input) {
             val (direction, distance) = line.split(" ")
             val amount = distance.toInt()
             when (direction) {
-                "forward" -> currentPoint = Point2D(currentPoint.x + amount, currentPoint.y - amount * aim)
+                "forward" -> currentPoint = Point(currentPoint.x + amount, currentPoint.y - amount * aim)
                 "down" -> aim -= amount
                 "up" -> aim += amount
                 else -> throw IllegalArgumentException("Unknown direction: $direction")
@@ -45,5 +45,3 @@ public class Day02(private val input: List<String>) {
         return abs(currentPoint.x * currentPoint.y)
     }
 }
-
-private data class Point2D(val x: Int, val y: Int)
