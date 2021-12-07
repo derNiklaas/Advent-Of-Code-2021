@@ -21,7 +21,6 @@ public class Day07(private val input: List<Int>) {
         input.first().rangeTo(input.last()).minOf { alignedPosition ->
             input.sumOf {
                 if (secondPart) {
-
                     val steps = abs(it - alignedPosition)
                     (steps * steps + steps) / 2
                 } else {
