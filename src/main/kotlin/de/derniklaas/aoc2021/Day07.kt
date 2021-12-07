@@ -24,14 +24,11 @@ public class Day07(private val input: List<Int>) {
 
         for (alignedPosition in smallestPos..largestPos) {
             val cost = input.sumOf {
-                var sum = 0
-                if (secondPart) {
+                val sum = if (secondPart) {
                     val steps = abs(it - alignedPosition)
-                    for (i in 1..steps) {
-                        sum += i
-                    }
+                    (steps * steps + steps) / 2
                 } else {
-                    sum = abs(it - alignedPosition)
+                    abs(it - alignedPosition)
                 }
 
                 sum
