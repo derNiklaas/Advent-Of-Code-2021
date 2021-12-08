@@ -29,26 +29,27 @@ public class Day08(private val input: List<String>) {
         }
 
         return lines.sumOf { (input, output) ->
-            getRandomConfiguration(input, output)
+            getConfiguration(input, output)
         }
     }
 
-    private fun getRandomConfiguration(inputs: List<String>, outputs: List<String>): Int {
-        val chars = 'a'..'g'
-        val inputCables = 0..6
+    private fun getConfiguration(inputs: List<String>, outputs: List<String>): Int {
+        val chars = ('a'..'g').toSet()
+        val inputCables = (0..6).toSet().allPermutations()
 
         fun getMapping(): Map<Char, Int> {
-            permute@ while (true) {
-                val permutation = chars.zip(inputCables.shuffled()).toMap()
+            permute@ for (permutation in inputCables) {
+                val map = chars.zip(permutation).toMap()
                 for (input in inputs) {
-                    val mapped = input.map { permutation[it] }.toSet()
+                    val mapped = input.map { map[it] }.toSet()
                     // Check if the segment is valid
                     if (!segmentsToDigit.containsKey(mapped)) {
                         continue@permute
                     }
                 }
-                return permutation
+                return map
             }
+            throw IllegalStateException("No valid mapping found")
         }
 
         val mapping = getMapping()
