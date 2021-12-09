@@ -10,7 +10,7 @@ fun main() {
 }
 
 public class Day09(private val input: List<List<Int>>) {
-    private var basins = Array(input.size) { Array(input[0].size) { false } }
+    private var basins = mutableListOf<Pair<Int, Int>>()
     private var visited = Array(input.size) { Array(input[0].size) { false } }
 
     public fun part1(): Int {
@@ -45,7 +45,7 @@ public class Day09(private val input: List<List<Int>>) {
                 }
                 if (lowestPoint) {
                     points += input[i][j] + 1
-                    basins[i][j] = true
+                    basins += Pair(i, j)
                 }
             }
         }
@@ -57,12 +57,8 @@ public class Day09(private val input: List<List<Int>>) {
 
         val basinSizes = mutableListOf<Int>()
 
-        for (i in input.indices) {
-            for (j in input[0].indices) {
-                if (basins[i][j]) {
-                    basinSizes += getSize(i, j)
-                }
-            }
+        for ((i, j) in basins) {
+            basinSizes += getSize(i, j)
         }
 
         val sizes = basinSizes.sortedByDescending { it }
