@@ -20,7 +20,7 @@ public class Day09(private val input: List<List<Int>>) {
             for (j in input[0].indices) {
                 var lowestPoint = true
 
-                // The biggest one-digit number is 9, so there can't be a smaller one.
+                // The biggest one-digit number is 9, so there can only be smaller numbers or 9 around it.
                 if (input[i][j] == 9) continue
 
                 if (i - 1 in input.indices) { // Up
@@ -54,7 +54,6 @@ public class Day09(private val input: List<List<Int>>) {
     }
 
     public fun part2(): Int {
-
         val basinSizes = mutableListOf<Int>()
 
         for ((i, j) in basins) {
