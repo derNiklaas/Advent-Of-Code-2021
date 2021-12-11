@@ -20,9 +20,7 @@ public class Day11(private val input: List<MutableList<Int>>) {
         return simulate(copy, 100)
     }
 
-    public fun part2(): Int {
-        return simulate(input)
-    }
+    public fun part2() = simulate(input)
 
     private fun simulate(input: List<MutableList<Int>>, maxStep: Int = 0): Int {
         var step = 0
@@ -84,15 +82,4 @@ public class Day11(private val input: List<MutableList<Int>>) {
             }
         }
     }
-
-
-    public fun printList() {
-        for (i in input.indices) {
-            for (j in input[0].indices) {
-                print(input[i][j])
-            }
-            println()
-        }
-    }
-
 }
