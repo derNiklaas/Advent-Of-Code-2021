@@ -35,7 +35,7 @@ public class Day12(input: List<Pair<String, String>>) {
     public fun part2(): Int {
         val targetSet = mutableSetOf<List<String>>()
 
-        for (smallCaves in nodes.filter { !it.first().isUpperCase() && it !in listOf("start", "end") }) {
+        for (smallCaves in nodes.filter { it.isLowerCase() && it !in listOf("start", "end") }) {
             findPaths(listOf("start"), targetSet, smallCaves)
         }
 
@@ -57,8 +57,7 @@ public class Day12(input: List<Pair<String, String>>) {
         val nextNodes = transitions[currentNode]!!
         // Filter all transitions that are not allowed / we've already visited (twice)
         val candidates = nextNodes.filter {
-            it.first()
-                .isUpperCase() || it !in (currentPath + "start") || (it == specialBigCave && currentPath.count { it == specialBigCave } <= 1)
+            it.isUpperCase() || it !in (currentPath + "start") || (it == specialBigCave && currentPath.count { it == specialBigCave } <= 1)
         }
         // Recurse for all candidates
         for (candidate in candidates) {

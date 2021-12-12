@@ -12,6 +12,10 @@ public fun String.splitAndMapToInt(deliminator: String = " ") = split(deliminato
 
 public fun String.splitAndMapToInt(deliminator: Regex) = split(deliminator).filter(String::isNotEmpty).mapToInt()
 
+public fun String.isLowerCase() = all(Char::isLowerCase)
+
+public fun String.isUpperCase() = all(Char::isUpperCase)
+
 public fun Set<Int>.allPermutations(): Set<List<Int>> {
     if (this.isEmpty()) return emptySet()
     return _allPermutations(this.toList())
