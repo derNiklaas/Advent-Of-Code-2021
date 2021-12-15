@@ -3,6 +3,13 @@ package de.derniklaas.aoc2021
 import java.io.File
 import kotlin.math.abs
 
+/*
+
+PLEASE DO NOT RUN THIS CODE FOR PART 2. THIS IS SUPER, SUPER SLOW. [30-40 minutes]
+BUT IT WORKS... SO I'LL JUST LEAVE IT HERE.
+
+ */
+
 fun main() {
     val input = File("src/main/resources/Day15.txt").readLines().splitAndMapToInt("")
     val nodesP1 = getNodes(input)
