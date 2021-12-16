@@ -16,6 +16,14 @@ public fun String.isLowerCase() = all(Char::isLowerCase)
 
 public fun String.isUpperCase() = all(Char::isUpperCase)
 
+public fun StringBuilder.deletePrefix(length: Int): StringBuilder = delete(0, length)
+
+public fun StringBuilder.takeAndDelete(length: Int): String {
+    val result = take(length)
+    deletePrefix(length)
+    return result.toString()
+}
+
 public fun Set<Int>.allPermutations(): Set<List<Int>> {
     if (this.isEmpty()) return emptySet()
     return _allPermutations(this.toList())
