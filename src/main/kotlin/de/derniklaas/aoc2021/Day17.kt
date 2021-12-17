@@ -1,6 +1,7 @@
 package de.derniklaas.aoc2021
 
 import java.io.File
+import kotlin.math.abs
 
 public fun main() {
     val input = File("src/main/resources/Day17.txt").readLines().first()
@@ -16,18 +17,15 @@ public class Day17(input: String) {
     private val targetYArea: IntRange
 
     init {
-        val (x, y) = input.split(",").map { it.trim().split("=")[1].split("..") }
-        targetXArea = x.first().toInt()..x.last().toInt()
-        targetYArea = y.first().toInt()..y.last().toInt()
+        val (x, y) = input.split(",").map { it.trim().split("=")[1].splitAndMapToInt("..") }
+        targetXArea = x.first()..x.last()
+        targetYArea = y.first()..y.last()
     }
 
     public fun solve(): Pair<Int, Int> {
         val validTargets = mutableListOf<Int>()
-        // x/y values tweaked, so it's faster & still gives the correct example.
-        // If you don't get the right result, tweak the values.
-        // Initially I did [-1000;1000], but that was too slow
-        for (x in -200..200) {
-            for (y in -200..200) {
+        for (x in 0..targetXArea.last) {
+            for (y in targetYArea.first..abs(targetYArea.first)) {
                 val velocity = Point(x, y)
                 val pair = simulate(velocity)
                 if (pair.first) {
@@ -44,7 +42,7 @@ public class Day17(input: String) {
 
     private fun simulate(velocity: Point): Pair<Boolean, Int> {
         val currentPos = Point(0, 0)
-        val lowestPossibleY = targetYArea.minOf { it }
+        val lowestPossibleY = targetYArea.first
         var highestY = lowestPossibleY - 1
 
         var xVelocity = velocity.x
