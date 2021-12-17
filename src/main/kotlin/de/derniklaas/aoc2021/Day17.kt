@@ -51,32 +51,34 @@ public class Day17(input: String) {
         var yVelocity = velocity.y
 
         while (true) {
-            // Check if the point is in the target area
-
+            // Check if the current position is in the target area.
             if (currentPos.x in targetXArea && currentPos.y in targetYArea) {
                 return Pair(true, highestY)
             }
 
-            // Below target zone, literally impossible.
+            // Cancel the current simulation if it's impossible to hit the target area.
+            // This is the case if the current y position is below the lowest possible target y value.
             if (currentPos.y < lowestPossibleY) {
                 return Pair(false, 0)
             }
 
+            // Add the current velocity to the current position.
             currentPos += Point(xVelocity, yVelocity)
+
+            // If the current position is higher than the highest possible target y value,
+            // change the new highest y value to the current y value.
             if (currentPos.y > highestY) {
                 highestY = currentPos.y
             }
 
+            // If possible, change the x velocity by 1 towards ``0``.
             if (xVelocity > 0) {
                 xVelocity--
             } else if (xVelocity < 0) {
                 xVelocity++
             }
+            // Decrease y velocity by 1 due to gravity.
             yVelocity--
-
-            //println(currentPos)
-            //println("$xVelocity, $yVelocity")
-
         }
 
     }
