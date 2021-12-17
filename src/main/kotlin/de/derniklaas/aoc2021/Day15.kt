@@ -10,7 +10,7 @@ BUT IT WORKS... SO I'LL JUST LEAVE IT HERE.
 
  */
 
-fun main() {
+public fun main() {
     val input = File("src/main/resources/Day15.txt").readLines().splitAndMapToInt("")
     val nodesP1 = getNodes(input)
     println("Part 1: ${Day15(nodesP1).solve()}")

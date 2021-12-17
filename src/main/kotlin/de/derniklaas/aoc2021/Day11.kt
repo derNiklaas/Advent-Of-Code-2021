@@ -2,7 +2,7 @@ package de.derniklaas.aoc2021
 
 import java.io.File
 
-fun main() {
+public fun main() {
     val input = File("src/main/resources/Day11.txt").readLines().splitAndMapToInt("").map { it.toMutableList() }
     val day11 = Day11(input)
     println("Part 1: ${day11.part1()}")

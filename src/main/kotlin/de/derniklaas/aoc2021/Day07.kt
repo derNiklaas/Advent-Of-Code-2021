@@ -5,7 +5,7 @@ import kotlin.math.abs
 
 // o7 in the chat
 
-fun main() {
+public fun main() {
     val input = File("src/main/resources/Day07.txt").readLines().first().splitAndMapToInt(",").sorted()
     val day07 = Day07(input)
     println("Part 1: ${day07.part1()}")

@@ -2,7 +2,7 @@ package de.derniklaas.aoc2021
 
 import java.io.File
 
-fun main() {
+public fun main() {
     val input = File("src/main/resources/Day04.txt").readLines().filter { it.isNotEmpty() && it.isNotBlank() }
     val day04 = Day04(input)
     println("Part 1: ${day04.part1()}")

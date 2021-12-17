@@ -3,7 +3,7 @@ package de.derniklaas.aoc2021
 import java.io.File
 import kotlin.math.abs
 
-fun main() {
+public fun main() {
     val input = File("src/main/resources/Day02.txt").readLines()
     val day02 = Day02(input)
     println("Part 1: ${day02.part1()}")

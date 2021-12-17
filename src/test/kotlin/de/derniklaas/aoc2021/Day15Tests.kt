@@ -4,7 +4,7 @@ import java.io.File
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class Day15Tests {
+public class Day15Tests {
     @Test
     public fun part1() {
         val input = File("src/test/resources/Day15.txt").readLines().splitAndMapToInt("")

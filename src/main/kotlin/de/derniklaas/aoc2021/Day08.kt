@@ -2,7 +2,7 @@ package de.derniklaas.aoc2021
 
 import java.io.File
 
-fun main() {
+public fun main() {
     val input = File("src/main/resources/Day08.txt").readLines()
     val day08 = Day08(input)
     println("Part 1: ${day08.part1()}")

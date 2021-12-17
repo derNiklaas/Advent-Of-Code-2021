@@ -3,8 +3,7 @@ package de.derniklaas.aoc2021
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class Day07Tests {
-
+public class Day07Tests {
     @Test
     public fun part1() {
         val inputs = "16,1,2,0,4,2,7,1,2,14".splitAndMapToInt(",").sorted()

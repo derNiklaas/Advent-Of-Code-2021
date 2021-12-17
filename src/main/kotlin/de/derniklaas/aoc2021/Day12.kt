@@ -2,7 +2,7 @@ package de.derniklaas.aoc2021
 
 import java.io.File
 
-fun main() {
+public fun main() {
     val input = File("src/main/resources/Day12.txt").readLines().map {
         val (from, to) = it.split("-"); from to to
     }

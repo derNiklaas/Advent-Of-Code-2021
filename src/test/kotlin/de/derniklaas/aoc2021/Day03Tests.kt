@@ -3,8 +3,7 @@ package de.derniklaas.aoc2021
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class Day03Tests {
-
+public class Day03Tests {
     @Test
     public fun part1() {
         val inputs = listOf(

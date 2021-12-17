@@ -3,8 +3,7 @@ package de.derniklaas.aoc2021
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class Day06Tests {
-
+public class Day06Tests {
     @Test
     public fun part1() {
         val inputs = "3,4,3,1,2".splitAndMapToInt(",")

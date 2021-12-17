@@ -4,8 +4,7 @@ import java.io.File
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class Day04Tests {
-
+public class Day04Tests {
     @Test
     public fun part1() {
         val inputs = File("src/test/resources/Day04.txt").readLines().filter { it.isNotEmpty() && it.isNotBlank() }

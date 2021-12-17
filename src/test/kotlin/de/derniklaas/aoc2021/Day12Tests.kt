@@ -4,7 +4,7 @@ import java.io.File
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class Day12Tests {
+public class Day12Tests {
     @Test
     public fun part1() {
         val inputs = File("src/test/resources/Day12.txt").readLines().map {

@@ -3,8 +3,7 @@ package de.derniklaas.aoc2021
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class Day16Tests {
-
+public class Day16Tests {
     @Test
     public fun part1() {
         Assertions.assertEquals(16, Day16("8A004A801A8002F478").part1())
