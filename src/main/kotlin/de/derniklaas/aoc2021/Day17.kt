@@ -22,7 +22,7 @@ public class Day17(input: String) {
     }
 
     public fun solve(): Pair<Int, Int> {
-        val validTargets = mutableMapOf<Point, Int>()
+        val validTargets = mutableListOf<Int>()
         // x/y values tweaked, so it's faster & still gives the correct example.
         // If you don't get the right result, tweak the values.
         // Initially I did [-1000;1000], but that was too slow
@@ -31,12 +31,12 @@ public class Day17(input: String) {
                 val velocity = Point(x, y)
                 val pair = simulate(velocity)
                 if (pair.first) {
-                    validTargets += velocity to pair.second
+                    validTargets += pair.second
                 }
             }
         }
 
-        val max = validTargets.maxOf { it.value }
+        val max = validTargets.maxOf { it }
         val velocities = validTargets.count()
 
         return Pair(max, velocities)
