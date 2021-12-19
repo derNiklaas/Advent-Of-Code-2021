@@ -20,10 +20,10 @@ public class Day19(input: List<String>) {
     public fun part1() = solutions.first.size
 
     public fun part2(): Int {
-        val solved = solutions.second
+        val scanners = solutions.second
         val list = buildList {
-            for (s1 in solved) {
-                for (s2 in solved) {
+            for (s1 in scanners) {
+                for (s2 in scanners) {
                     if (s1 != s2) {
                         add(s1!!.manhattanDistance(s2!!))
                     }
@@ -40,10 +40,10 @@ public class Day19(input: List<String>) {
 
         val transformations = arrayOfNulls<Transformation3D>(size)
         val locations = scanners[0].toMutableSet()
-        val s = arrayOfNulls<Point3D>(size)
+        val scannerLocations = arrayOfNulls<Point3D>(size)
 
         transformations[0] = Transformation3D.Identity
-        s[0] = Point3D.NEUTRAL
+        scannerLocations[0] = Point3D.NEUTRAL
 
         val foundSet = hashSetOf(0)
         val remaining = (1 until scanners.size).toHashSet()
@@ -51,11 +51,11 @@ public class Day19(input: List<String>) {
         pair@ while (remaining.isNotEmpty()) {
             for (found in foundSet) {
                 for (missing in remaining) {
-                    val o = check(cf, cr, found, missing) ?: continue
-                    val f = Transformation3D.Combo(o, transformations[found]!!)
-                    transformations[missing] = f
-                    s[missing] = Point3D.NEUTRAL.apply(f)
-                    locations += scanners[missing].map { it.apply(f) }
+                    val transformation = check(cf, cr, found, missing) ?: continue
+                    val transformation2 = Transformation3D.Combo(transformation, transformations[found]!!)
+                    transformations[missing] = transformation2
+                    scannerLocations[missing] = Point3D.NEUTRAL.apply(transformation2)
+                    locations += scanners[missing].map { it.apply(transformation2) }
                     foundSet += missing
                     remaining -= missing
                     continue@pair
@@ -64,7 +64,7 @@ public class Day19(input: List<String>) {
             error("Couldn't find a solution.")
         }
 
-        return Pair(locations.toSet(), s)
+        return Pair(locations.toSet(), scannerLocations)
     }
 
 
