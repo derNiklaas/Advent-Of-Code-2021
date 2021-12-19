@@ -2,14 +2,14 @@ package de.derniklaas.aoc2021
 
 import kotlin.math.abs
 
-public class Point(public var x: Int, public var y: Int) {
+public data class Point(public var x: Int, public var y: Int) {
     public operator fun plusAssign(other: Point) {
         x += other.x
         y += other.y
     }
 }
 
-public class Point3D(public var x: Int, public var y: Int, public var z: Int) {
+public data class Point3D(public var x: Int, public var y: Int, public var z: Int) {
     public companion object {
         public val NEUTRAL = Point3D(0, 0, 0)
     }
