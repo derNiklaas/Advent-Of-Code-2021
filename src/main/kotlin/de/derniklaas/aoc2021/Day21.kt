@@ -63,36 +63,29 @@ public class Day21(input: List<String>) {
 
         while (queue.isNotEmpty()) {
             val state = queue.removeFirst()
-            var positionA = state.positionA
-            var positionB = state.positionB
-            var pointsA = state.pointsA
-            var pointsB = state.pointsB
-            var player = state.firstPlayer
-            when (player) {
-                true -> {
-                    var points = state.currentDice + positionA
-                    while (points !in 1..10) {
-                        points -= 10
-                    }
-                    pointsA += points
-                    positionA = points
-
-                    if (pointsA >= 21) {
-                        wins[0] += state.wins
-                        continue
-                    }
+            var (positionA, positionB, pointsA, pointsB, _, player) = state
+            if (player) {
+                var points = state.currentDice + positionA
+                while (points !in 1..10) {
+                    points -= 10
                 }
-                false -> {
-                    var points = state.currentDice + positionB
-                    while (points !in 1..10) {
-                        points -= 10
-                    }
-                    pointsB += points
-                    positionB = points
-                    if (pointsB >= 21) {
-                        wins[1] += state.wins
-                        continue
-                    }
+                pointsA += points
+                positionA = points
+
+                if (pointsA >= 21) {
+                    wins[0] += state.wins
+                    continue
+                }
+            } else {
+                var points = state.currentDice + positionB
+                while (points !in 1..10) {
+                    points -= 10
+                }
+                pointsB += points
+                positionB = points
+                if (pointsB >= 21) {
+                    wins[1] += state.wins
+                    continue
                 }
             }
             player = !player
