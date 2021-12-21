@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 public class Day08Tests {
-
     @Test
     public fun part1() {
         val inputs = File("src/test/resources/Day08.txt").readLines()
