@@ -6,15 +6,13 @@ import org.junit.jupiter.api.Test
 public class Day07Tests {
     @Test
     public fun part1() {
-        val inputs = "16,1,2,0,4,2,7,1,2,14".splitAndMapToInt(",").sorted()
-        val day07 = Day07(inputs)
-        Assertions.assertEquals(37, day07.part1())
+        val input = "16,1,2,0,4,2,7,1,2,14".splitAndMapToInt(",").sorted()
+        Assertions.assertEquals(37, Day07(input).part1())
     }
 
     @Test
     public fun part2() {
-        val inputs = "16,1,2,0,4,2,7,1,2,14".splitAndMapToInt(",").sorted()
-        val day07 = Day07(inputs)
-        Assertions.assertEquals(168, day07.part2())
+        val input = "16,1,2,0,4,2,7,1,2,14".splitAndMapToInt(",").sorted()
+        Assertions.assertEquals(168, Day07(input).part2())
     }
 }

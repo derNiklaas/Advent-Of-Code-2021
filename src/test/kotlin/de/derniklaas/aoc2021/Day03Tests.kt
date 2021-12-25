@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 public class Day03Tests {
     @Test
     public fun part1() {
-        val inputs = listOf(
+        val input = listOf(
             "00100",
             "11110",
             "10110",
@@ -20,13 +20,12 @@ public class Day03Tests {
             "00010",
             "01010"
         )
-        val day03 = Day03(inputs)
-        Assertions.assertEquals(198, day03.part1())
+        Assertions.assertEquals(198, Day03(input).part1())
     }
 
     @Test
     public fun part2() {
-        val inputs = listOf(
+        val input = listOf(
             "00100",
             "11110",
             "10110",
@@ -40,7 +39,6 @@ public class Day03Tests {
             "00010",
             "01010"
         )
-        val day03 = Day03(inputs)
-        Assertions.assertEquals(230, day03.part2())
+        Assertions.assertEquals(230, Day03(input).part2())
     }
 }
