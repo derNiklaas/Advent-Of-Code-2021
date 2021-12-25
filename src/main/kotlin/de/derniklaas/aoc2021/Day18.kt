@@ -29,7 +29,7 @@ public class Day18(input: List<String>) {
 
     private fun parseInput(input: StringBuilder): Expression {
         // Check if we are starting a pair in the format [x,y]
-        // where x and y can be either numbers of other expressions
+        // where x and y can be either numbers or other expressions
         if (input.startsWith("[")) {
             input.deletePrefix(1) // remove [
             val left = parseInput(input) // remove the x part
