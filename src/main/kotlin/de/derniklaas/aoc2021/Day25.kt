@@ -69,7 +69,7 @@ public class Day25(input: List<String>) {
             targetMap += move.southNeighbor() to Cumber(true)
         }
 
-        return Result(targetMap, changed)
+        return Result(targetMap.toMap(), changed)
     }
 
     private fun Point.eastNeighbor(): Point {

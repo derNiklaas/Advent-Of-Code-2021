@@ -48,15 +48,7 @@ public class Day13(input: List<String>) {
         }
     }
 
-    public fun part1(): Int {
-        val card = instructions[0].fold(card)
-
-        //  printCard()
-
-        //println("bad: 796, 589")
-
-        return card.size
-    }
+    public fun part1() = instructions[0].fold(card).size
 
     public fun part2(): Int {
         for (instruction in instructions) {

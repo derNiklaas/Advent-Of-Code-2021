@@ -60,7 +60,7 @@ public class Day03(private val input: List<String>) {
         input.forEach { line ->
             line.split("").forEachIndexed { index, char ->
                 if (char == "1") {
-                    map[index - 1] = map[index - 1]?.plus(1) ?: 1
+                    map[index - 1] = map.getOrDefault(index - 1, 0) + 1
                 }
             }
         }
