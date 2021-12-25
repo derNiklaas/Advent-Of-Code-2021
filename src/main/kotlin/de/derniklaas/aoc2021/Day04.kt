@@ -6,109 +6,68 @@ public fun main() {
     val input = File("src/main/resources/Day04.txt").readLines().filter { it.isNotEmpty() && it.isNotBlank() }
     val day04 = Day04(input)
     println("Part 1: ${day04.part1()}")
-    day04.resetBoards()
     println("Part 2: ${day04.part2()}")
 }
 
 
 public class Day04(private val input: List<String>) {
-    private var numbers = listOf<Int>()
-    private val boards = mutableListOf<BingoBoard>()
+    private val finishedNumbers = mutableListOf<Int>()
 
     init {
-        resetBoards()
-    }
+        // Read drawn numbers
+        val numbers = input.first().splitAndMapToInt(",")
 
-    fun resetBoards() {
-        boards.clear()
-        var currentX = 0
-        var currentBoard = Array(5) {
-            Array(5) { BingoField(-1, false) }
-        }
-        for (line in input) {
-            // Get all drawn numbers in order
-            if (line.contains(",")) {
-                numbers = line.splitAndMapToInt(",")
-                continue
-            }
+        // Set up boards
+        val boards = mutableListOf<BingoBoard>()
 
-            // Fill the board with numbers
-            currentBoard[currentX] =
-                line.splitAndMapToInt().map { BingoField(it, false) }.toTypedArray()
-            currentX++
-
-            // Create a new Board if we reached the end of the current one
-            if (currentX == 5) {
-                currentX = 0
-                boards += currentBoard
-                currentBoard = Array(5) {
-                    Array(5) { BingoField(-1, false) }
-                }
+        input.drop(1).chunked(5).forEach { board ->
+            boards += board.map { line ->
+                line.splitAndMapToInt().map { BingoField(it, false) }
             }
         }
-    }
 
-    public fun part1(): Int {
+        // Solve all boards
+        var remainingCards = boards.toList()
         for (number in numbers) {
-            advanceBoards(number)
-            for (board in boards) {
-                if (hasBingo(board)) {
-                    return calculateBoard(board) * number
-                }
+            for (board in remainingCards) {
+                board.markNumber(number)
+                if (board.hasBingo()) finishedNumbers += board.calculateScore() * number
             }
-        }
-        return 0
-    }
-
-    public fun part2(): Int {
-        // Position of the final board
-        var finalBoard = -1
-        for (number in numbers) {
-            advanceBoards(number)
-
-            // Get the information about the last board
-            if (boards.filter { !hasBingo(it) }.size == 1) {
-                finalBoard = boards.indexOf(boards.first { !hasBingo(it) })
-            }
-
-            // Calculate the winner board
-            if (boards.none { !hasBingo(it) }) {
-                return calculateBoard(boards[finalBoard]) * number
-            }
-        }
-        return 0
-    }
-
-    /** Checks off tiles with the drawn [number]. */
-    private fun advanceBoards(number: Int) {
-        for (board in boards) {
-            for (row in board) {
-                for (field in row) {
-                    if (field.number == number) {
-                        field.drawn = true
-                    }
-                }
-            }
+            remainingCards = remainingCards.filter { !it.hasBingo() }
         }
     }
 
-    /** Checks if the [board] has a bingo (ignoring diagonals bingos). */
-    private fun hasBingo(board: BingoBoard): Boolean {
+    public fun part1() = finishedNumbers[0]
+
+    public fun part2() = finishedNumbers.last()
+
+    /** Checks if this board has a bingo (ignoring diagonals bingos). */
+    private fun BingoBoard.hasBingo(): Boolean {
         for (i in 0 until 5) {
-            if (board[i].all { it.drawn }) return true
-            if (board[0][i].drawn && board[1][i].drawn && board[2][i].drawn && board[3][i].drawn && board[4][i].drawn) return true
+            if (this[i].all { it.drawn }) return true
+            if (this[0][i].drawn && this[1][i].drawn && this[2][i].drawn && this[3][i].drawn && this[4][i].drawn) return true
         }
         return false
     }
 
-    /** Calculate the score of a given [board]. */
-    private fun calculateBoard(board: BingoBoard) = board.sumOf {
+    /** Calculate the score of this board. */
+    private fun BingoBoard.calculateScore() = this.sumOf {
         it.sumOf { field ->
             if (!field.drawn) field.number else 0
+        }
+    }
+
+    private fun BingoBoard.markNumber(number: Int) {
+        for (row in this) {
+            for (field in row) {
+                if (field.number == number) {
+                    field.drawn = true
+                }
+            }
         }
     }
 }
 
 private data class BingoField(val number: Int, var drawn: Boolean)
 
-private typealias BingoBoard = Array<Array<BingoField>>
+private typealias BingoBoard = List<List<BingoField>>
